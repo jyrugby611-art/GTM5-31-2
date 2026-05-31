@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMIÈRE — Premium Skincare</title>
+
+  <!-- =====================================================
+       GTM / Google広告 連携ポイント一覧
+       =====================================================
+       【GTMコンテナ】
+         ▶ head内・body直後にGTMスニペットを貼る箇所あり（コメントで明示）
+
+       【Google広告 コンバージョン計測ポイント】
+         1. 購入完了          → CV: Purchase        (動的金額・商品名)
+         2. カートに追加      → CV: AddToCart        (商品名)
+         3. 問い合わせ送信    → CV: ContactFormLead  (フォームsubmit)
+         4. メルマガ登録      → CV: NewsletterSignup (email)
+         5. 商品ページ閲覧    → CV: ViewItem         (商品名・価格)
+
+       【Google広告 リマーケティングタグ】
+         ▶ 全ページ: ページタイプ (home / product / cart / thank_you)
+         ▶ 商品詳細: pagetype=product, prodid, totalvalue
+
+       【dataLayer.push イベント一覧】
+         - page_view (自動)
+         - view_item
+         - add_to_cart
+         - begin_checkout
+         - purchase
+         - generate_lead (contact form)
+         - sign_up (newsletter)
+         - tab_switch
+         - scroll_depth (25/50/75/100%)
+       ===================================================== -->
+
+  <!-- Google Tag Manager -->
+  <!-- ↓↓↓ ここにGTMのheadスニペットを貼り付けてください ↓↓↓ -->
+  <!--
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+  -->
+  <!-- End Google Tag Manager -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #FAF7F2;
+      --warm-white: #FDF9F4;
+      --sand: #E8DDD0;
+      --taupe: #C4B5A0;
+      --brown: #7A6555;
+      --dark: #2C2118;
+      --accent: #C8956C;
+      --accent-dark: #A0704A;
+      --green: #6B8C7A;
+      --red: #C4614A;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--dark);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--sand);
+      padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 32px; }
+    nav a {
+      text-decoration: none; color: var(--brown);
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--dark); }
+    .header-right { display: flex; align-items: center; gap: 20px; }
+    .cart-btn {
+      position: relative; cursor: pointer;
+      background: var(--dark); color: #fff;
+      border: none; padding: 8px 20px;
+      font-family: var(--font-body); font-size: 12px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background .2s;
+    }
+    .cart-btn:hover { background: var(--accent); }
+    .cart-count {
+      position: absolute; top: -8px; right: -8px;
+      background: var(--accent); color: #fff;
+      width: 18px; height: 18px; border-radius: 50%;
+      font-size: 10px; display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 580px;
+      background: linear-gradient(135deg, #2C2118 0%, #4A3828 50%, #6B5040 100%);
+      display: flex; align-items: center;
+      padding: 80px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(200,149,108,.25) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 560px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(200,149,108,.2);
+      border: 1px solid rgba(200,149,108,.5);
+      color: var(--accent);
+      padding: 4px 14px; font-size: 11px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 72px; font-weight: 300;
+      color: #fff; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero p {
+      color: rgba(255,255,255,.7);
+      font-size: 15px; line-height: 1.8;
+      margin-bottom: 36px;
+    }
+    .hero-btns { display: flex; gap: 16px; }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      border: none; padding: 14px 32px;
+      font-family: var(--font-body); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-outline {
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,.4); padding: 14px 32px;
+      font-family: var(--font-body); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-outline:hover { border-color: #fff; }
+
+    /* ── SECTION ── */
+    .section { padding: 80px 60px; }
+    .section-header { margin-bottom: 48px; }
+    .section-label {
+      font-size: 11px; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--taupe);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 48px; font-weight: 300;
+      line-height: 1.2;
+    }
+
+    /* ── PRODUCT TABS ── */
+    .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--sand); margin-bottom: 40px; }
+    .tab {
+      padding: 12px 28px; cursor: pointer;
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      border-bottom: 2px solid transparent;
+      color: var(--taupe); transition: all .2s;
+      margin-bottom: -1px;
+    }
+    .tab.active { color: var(--dark); border-bottom-color: var(--dark); }
+    .tab:hover { color: var(--dark); }
+
+    /* ── PRODUCT GRID ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 32px;
+    }
+    .product-card {
+      cursor: pointer; transition: transform .3s;
+    }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-img {
+      aspect-ratio: 3/4;
+      background: var(--sand);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 60px; margin-bottom: 16px;
+      position: relative; overflow: hidden;
+    }
+    .product-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(44,33,24,.15));
+    }
+    .product-badge-new {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--accent); color: #fff;
+      font-size: 9px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 3px 8px;
+      z-index: 1;
+    }
+    .product-name {
+      font-size: 15px; font-weight: 500; margin-bottom: 4px;
+    }
+    .product-desc {
+      font-size: 12px; color: var(--taupe); margin-bottom: 8px;
+    }
+    .product-price {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 400;
+    }
+    .product-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .btn-cart {
+      flex: 1; padding: 10px;
+      background: var(--dark); color: #fff; border: none;
+      font-family: var(--font-body); font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-cart:hover { background: var(--accent); }
+    .btn-detail {
+      padding: 10px 16px;
+      background: transparent; color: var(--dark);
+      border: 1px solid var(--sand);
+      font-family: var(--font-body); font-size: 11px;
+      cursor: pointer; transition: all .2s;
+    }
+    .btn-detail:hover { border-color: var(--dark); }
+
+    /* ── FEATURES ── */
+    .features-section {
+      background: var(--dark);
+      padding: 80px 60px;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 40px;
+    }
+    .feature-item { text-align: center; }
+    .feature-icon { font-size: 36px; margin-bottom: 16px; }
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 22px; color: #fff;
+      margin-bottom: 8px;
+    }
+    .feature-text { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; }
+
+    /* ── CONTACT FORM ── */
+    .contact-section {
+      background: var(--warm-white);
+      padding: 80px 60px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: start;
+    }
+    .contact-info .section-title { margin-bottom: 20px; }
+    .contact-info p { color: var(--brown); line-height: 1.8; margin-bottom: 20px; }
+    .contact-detail { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+    .contact-detail-icon { font-size: 16px; margin-top: 2px; }
+    .contact-detail-text { font-size: 13px; color: var(--brown); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--taupe); margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 12px 16px;
+      background: var(--cream); border: 1px solid var(--sand);
+      font-family: var(--font-body); font-size: 14px; color: var(--dark);
+      outline: none; transition: border-color .2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .btn-submit {
+      width: 100%; padding: 14px;
+      background: var(--dark); color: #fff; border: none;
+      font-family: var(--font-body); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-submit:hover { background: var(--accent); }
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      padding: 60px; text-align: center;
+    }
+    .newsletter-section h2 {
+      font-family: var(--font-display);
+      font-size: 42px; font-weight: 300;
+      color: #fff; margin-bottom: 12px;
+    }
+    .newsletter-section p { color: rgba(255,255,255,.8); margin-bottom: 28px; }
+    .newsletter-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; }
+    .newsletter-form input {
+      flex: 1; padding: 14px 20px;
+      border: none; background: rgba(255,255,255,.95);
+      font-family: var(--font-body); font-size: 14px;
+      outline: none;
+    }
+    .newsletter-form button {
+      padding: 14px 28px;
+      background: var(--dark); color: #fff; border: none;
+      font-family: var(--font-body); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background .2s;
+    }
+    .newsletter-form button:hover { background: #000; }
+
+    /* ── CART SIDEBAR ── */
+    .cart-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 200; opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+    .cart-sidebar {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 400px; background: var(--warm-white);
+      z-index: 201;
+      transform: translateX(100%); transition: transform .35s ease;
+      display: flex; flex-direction: column;
+    }
+    .cart-sidebar.open { transform: translateX(0); }
+    .cart-header {
+      padding: 24px 28px; border-bottom: 1px solid var(--sand);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .cart-header h3 {
+      font-family: var(--font-display); font-size: 24px; font-weight: 400;
+    }
+    .cart-close {
+      background: none; border: none; font-size: 20px;
+      cursor: pointer; color: var(--taupe); padding: 4px;
+    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 24px 28px; }
+    .cart-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 0; border-bottom: 1px solid var(--sand);
+    }
+    .cart-item-emoji { font-size: 40px; width: 60px; text-align: center; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-weight: 500; margin-bottom: 4px; }
+    .cart-item-price { color: var(--accent); font-family: var(--font-display); font-size: 18px; }
+    .cart-item-remove {
+      background: none; border: none; color: var(--taupe);
+      font-size: 16px; cursor: pointer;
+    }
+    .cart-empty { text-align: center; color: var(--taupe); padding: 60px 0; font-size: 15px; }
+    .cart-footer {
+      padding: 24px 28px; border-top: 1px solid var(--sand);
+    }
+    .cart-total {
+      display: flex; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .cart-total-label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .cart-total-price { font-family: var(--font-display); font-size: 24px; }
+    .btn-checkout {
+      width: 100%; padding: 16px;
+      background: var(--dark); color: #fff; border: none;
+      font-family: var(--font-body); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-checkout:hover { background: var(--accent); }
+
+    /* ── MODAL: Thank You / Product Detail ── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.6); z-index: 300;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--warm-white);
+      padding: 48px; max-width: 540px; width: 90%;
+      transform: scale(.95) translateY(20px); transition: transform .3s;
+      text-align: center; position: relative;
+    }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+    .modal-icon { font-size: 56px; margin-bottom: 20px; }
+    .modal h2 {
+      font-family: var(--font-display); font-size: 38px; font-weight: 300;
+      margin-bottom: 12px;
+    }
+    .modal p { color: var(--brown); line-height: 1.8; margin-bottom: 28px; }
+    .modal-close-btn {
+      background: var(--dark); color: #fff; border: none;
+      padding: 12px 32px; cursor: pointer;
+      font-family: var(--font-body); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .modal-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; margin-bottom: 24px; }
+    .modal-detail-emoji { font-size: 80px; text-align: center; padding: 24px; background: var(--sand); }
+    .modal-detail-info h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; margin-bottom: 8px; }
+    .modal-detail-info .price { font-family: var(--font-display); font-size: 32px; color: var(--accent); margin: 8px 0 12px; }
+    .modal-detail-info p { font-size: 13px; color: var(--brown); line-height: 1.8; }
+
+    /* ── GTM DATA LAYER MONITOR ── */
+    .dl-monitor {
+      position: fixed; bottom: 20px; left: 20px;
+      background: rgba(44,33,24,.95);
+      color: #fff; padding: 0;
+      width: 360px; max-height: 300px;
+      font-family: 'Courier New', monospace; font-size: 11px;
+      border-radius: 4px; overflow: hidden;
+      z-index: 500; box-shadow: 0 8px 40px rgba(0,0,0,.4);
+    }
+    .dl-monitor-header {
+      padding: 10px 16px;
+      background: rgba(200,149,108,.3);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; letter-spacing: 0.08em;
+    }
+    .dl-monitor-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+      margin-right: 8px; animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .dl-monitor-log {
+      overflow-y: auto; max-height: 220px; padding: 12px 16px;
+    }
+    .dl-log-item {
+      padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+      animation: fadeIn .3s ease;
+    }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:none} }
+    .dl-log-event { color: #f0c080; font-weight: bold; }
+    .dl-log-data { color: rgba(255,255,255,.5); font-size: 10px; margin-top: 2px; }
+    .dl-toggle {
+      background: none; border: none; color: rgba(255,255,255,.6);
+      cursor: pointer; font-size: 12px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.4);
+      padding: 40px 60px; text-align: center; font-size: 12px;
+    }
+    footer strong { color: rgba(255,255,255,.7); }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 340px; left: 20px;
+      background: var(--green); color: #fff;
+      padding: 12px 20px; font-size: 13px;
+      transform: translateY(20px); opacity: 0;
+      transition: all .3s; z-index: 600;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── SCROLL PROGRESS ── */
+    .scroll-bar {
+      position: fixed; top: 64px; left: 0; right: 0;
+      height: 3px; background: transparent; z-index: 99;
+    }
+    .scroll-bar-fill {
+      height: 100%; background: var(--accent);
+      width: 0%; transition: width .1s;
+    }
+
+    /* Page tabs for navigation */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<!-- ↓↓↓ bodyの直後にGTMのnoscriptスニペットを貼り付けてください ↓↓↓ -->
+<!--
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+-->
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Scroll Progress Bar -->
+<div class="scroll-bar"><div class="scroll-bar-fill" id="scrollFill"></div></div>
+
+<!-- ── HEADER ── -->
+<header>
+  <a class="logo" href="#" onclick="scrollToTop()">LUMI<span>È</span>RE</a>
+  <nav>
+    <a href="#" onclick="showSection('home')">ホーム</a>
+    <a href="#" onclick="showSection('products')">商品一覧</a>
+    <a href="#" onclick="showSection('about')">ブランド</a>
+    <a href="#" onclick="showSection('contact')">お問い合わせ</a>
+  </nav>
+  <div class="header-right">
+    <button class="cart-btn" onclick="openCart()">
+      カート
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ── MAIN CONTENT ── -->
+<main>
+
+  <!-- ── HOME SECTION ── -->
+  <div id="section-home" class="tab-panel active">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-badge">✦ New Collection 2025</span>
+        <h1>Reveal Your<br><em>Natural</em><br>Radiance</h1>
+        <p>厳選した植物由来成分と最先端のバイオテクノロジーを融合。<br>あなたの肌本来の輝きを取り戻すラグジュアリースキンケア。</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showSection('products')">コレクションを見る</button>
+          <button class="btn-outline" onclick="showSection('about')">ブランドについて</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="section">
+      <div class="section-header">
+        <p class="section-label">Featured Items</p>
+        <h2 class="section-title">人気の商品</h2>
+      </div>
+      <div id="home-products" class="product-grid"></div>
+    </section>
+
+    <!-- FEATURES -->
+    <div class="features-section">
+      <div class="feature-item">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-title">天然由来成分</div>
+        <div class="feature-text">98%の成分が植物由来。自然の力を最大限に活かした処方。</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🧪</div>
+        <div class="feature-title">皮膚科学的検証済み</div>
+        <div class="feature-text">独立した皮膚科学研究機関による厳格な臨床試験を実施。</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🐰</div>
+        <div class="feature-title">クルエルティフリー</div>
+        <div class="feature-text">動物実験不使用。環境に配慮したサステナブルパッケージ。</div>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter-section">
+      <h2>Special Offer</h2>
+      <p>メルマガ登録で初回15%OFF。新商品・限定セール情報をいち早くお届けします。</p>
+      <div class="newsletter-form">
+        <input type="email" id="newsletterEmail" placeholder="メールアドレスを入力">
+        <button onclick="signupNewsletter()">登録する</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── PRODUCTS SECTION ── -->
+  <div id="section-products" class="tab-panel">
+    <section class="section">
+      <div class="section-header">
+        <p class="section-label">Our Products</p>
+        <h2 class="section-title">全商品ラインアップ</h2>
+      </div>
+      <div class="tabs" id="productTabs">
+        <div class="tab active" onclick="filterProducts('all', this)">すべて</div>
+        <div class="tab" onclick="filterProducts('serum', this)">美容液</div>
+        <div class="tab" onclick="filterProducts('cream', this)">クリーム</div>
+        <div class="tab" onclick="filterProducts('toner', this)">化粧水</div>
+        <div class="tab" onclick="filterProducts('mask', this)">マスク</div>
+      </div>
+      <div id="all-products" class="product-grid"></div>
+    </section>
+  </div>
+
+  <!-- ── ABOUT SECTION ── -->
+  <div id="section-about" class="tab-panel">
+    <section class="hero" style="min-height:400px;">
+      <div class="hero-content">
+        <span class="hero-badge">✦ Our Story</span>
+        <h1 style="font-size:56px;">Beauty <em>From</em><br>Within</h1>
+        <p>2018年、パリで創業。自然と科学の融合を追求するブランドLUMIÈREは、すべての人が自分らしい美しさを輝かせることを目指しています。</p>
+      </div>
+    </section>
+    <div class="features-section" style="grid-template-columns:repeat(2,1fr);">
+      <div class="feature-item">
+        <div class="feature-icon">🌍</div>
+        <div class="feature-title">サステナビリティ</div>
+        <div class="feature-text">カーボンニュートラルを実現。環境負荷を最小限に抑えた製造プロセス。リサイクル可能なパッケージを100%使用。</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔬</div>
+        <div class="feature-title">研究開発</div>
+        <div class="feature-text">フランス・日本・韓国の三カ国に研究拠点を持ち、最先端の皮膚科学研究を推進。特許取得済み成分15種以上。</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🏆</div>
+        <div class="feature-title">受賞歴</div>
+        <div class="feature-text">Allure Best of Beauty 2024, Vogue Beauty Awards 2023など国際的な賞を多数受賞。業界を牽引する革新的ブランド。</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💎</div>
+        <div class="feature-title">プレミアム品質</div>
+        <div class="feature-text">すべての製品をフランスの自社工場で製造。ISO 22716認証取得済みの厳格な品質管理。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT SECTION ── -->
+  <div id="section-contact" class="tab-panel">
+    <div class="contact-section">
+      <div class="contact-info">
+        <p class="section-label">Contact Us</p>
+        <h2 class="section-title">お問い合わせ</h2>
+        <p>商品のご質問、ご注文、サンプルのご請求など、お気軽にお問い合わせください。専任のビューティアドバイザーが対応いたします。</p>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">📞</span>
+          <span class="contact-detail-text">0120-XXX-XXX（平日 10:00〜18:00）</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">✉️</span>
+          <span class="contact-detail-text">support@lumiere-beauty.jp</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">📍</span>
+          <span class="contact-detail-text">東京都港区南青山 X-X-X</span>
+        </div>
+      </div>
+      <div class="contact-form-wrapper">
+        <div class="form-row">
+          <div class="form-group">
+            <label>お名前 *</label>
+            <input type="text" id="contactName" placeholder="山田 花子">
+          </div>
+          <div class="form-group">
+            <label>メールアドレス *</label>
+            <input type="email" id="contactEmail" placeholder="example@email.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ種別</label>
+          <select id="contactType">
+            <option value="">選択してください</option>
+            <option value="product">商品について</option>
+            <option value="order">ご注文・お届けについて</option>
+            <option value="sample">サンプルリクエスト</option>
+            <option value="wholesale">卸・法人のお問い合わせ</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ内容 *</label>
+          <textarea id="contactMessage" placeholder="ご質問・ご要望をご記入ください"></textarea>
+        </div>
+        <button class="btn-submit" onclick="submitContact()">送信する</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p><strong>LUMIÈRE</strong> — Premium Skincare<br>
+  <small>このサイトはGTM・Google広告の練習用デモサイトです。実際の販売は行っておりません。</small></p>
+</footer>
+
+<!-- ── CART SIDEBAR ── -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Cart</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">カートは空です</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">合計金額</span>
+      <span class="cart-total-price" id="cartTotalPrice">¥0</span>
+    </div>
+    <button class="btn-checkout" onclick="beginCheckout()">購入手続きへ</button>
+  </div>
+</div>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<!-- ── dataLayer MONITOR ── -->
+<div class="dl-monitor" id="dlMonitor">
+  <div class="dl-monitor-header">
+    <span><span class="dl-monitor-dot"></span>dataLayer Monitor</span>
+    <button class="dl-toggle" onclick="toggleMonitor()" id="dlToggleBtn">▼ 折りたたむ</button>
+  </div>
+  <div class="dl-monitor-log" id="dlLog">
+    <div class="dl-log-item"><span style="color:rgba(255,255,255,.3);font-size:10px;">イベントはここに表示されます...</span></div>
+  </div>
+</div>
+
+<script>
+  // =====================================================
+  //  dataLayer 初期化
+  // =====================================================
+  window.dataLayer = window.dataLayer || [];
+
+  function pushEvent(eventName, params) {
+    const payload = { event: eventName, ...params };
+    window.dataLayer.push(payload);
+    logToMonitor(eventName, params);
+    console.log('[dataLayer]', payload);
+  }
+
+  // =====================================================
+  //  商品データ
+  // =====================================================
+  const PRODUCTS = [
+    { id:'P001', name:'ルミエール セラム', desc:'集中美容液・保湿 + 透明感', price:12800, emoji:'✨', category:'serum', isNew:true },
+    { id:'P002', name:'ハイドラ クリーム', desc:'深層保湿クリーム・夜用', price:9600, emoji:'🌙', category:'cream', isNew:false },
+    { id:'P003', name:'ローズ トナー', desc:'化粧水・整肌・毛穴ケア', price:6400, emoji:'🌹', category:'toner', isNew:false },
+    { id:'P004', name:'ゴールド マスク', desc:'金箔配合シートマスク 5枚', price:4800, emoji:'💛', category:'mask', isNew:true },
+    { id:'P005', name:'ビタミンC セラム', desc:'美白美容液・シミ・くすみ', price:14400, emoji:'🍊', category:'serum', isNew:false },
+    { id:'P006', name:'コラーゲン クリーム', desc:'エイジングケアクリーム', price:11200, emoji:'💜', category:'cream', isNew:true },
+    { id:'P007', name:'ハーブ トナー', desc:'鎮静化粧水・敏感肌用', price:5600, emoji:'🌿', category:'toner', isNew:false },
+    { id:'P008', name:'ブラック マスク', desc:'毛穴洗浄クレイマスク', price:3800, emoji:'🖤', category:'mask', isNew:false },
+  ];
+
+  // =====================================================
+  //  カート
+  // =====================================================
+  let cart = [];
+
+  function addToCart(productId) {
+    const p = PRODUCTS.find(x => x.id === productId);
+    if (!p) return;
+    cart.push({ ...p });
+    renderCart();
+    openCart();
+    showToast(`"${p.name}" をカートに追加しました`);
+
+    // ▶ dataLayer: add_to_cart (Google広告 / GA4)
+    pushEvent('add_to_cart', {
+      currency: 'JPY',
+      value: p.price,
+      items: [{ item_id: p.id, item_name: p.name, item_category: p.category, price: p.price, quantity: 1 }]
+    });
+  }
+
+  function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    renderCart();
+  }
+
+  function renderCart() {
+    const el = document.getElementById('cartItems');
+    const count = document.getElementById('cartCount');
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    document.getElementById('cartTotalPrice').textContent = `¥${total.toLocaleString()}`;
+    count.textContent = cart.length;
+
+    if (cart.length === 0) {
+      el.innerHTML = '<div class="cart-empty">カートは空です</div>';
+      return;
+    }
+    el.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        <div class="cart-item-emoji">${item.emoji}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">¥${item.price.toLocaleString()}</div>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function openCart() {
+    document.getElementById('cartOverlay').classList.add('open');
+    document.getElementById('cartSidebar').classList.add('open');
+  }
+  function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.getElementById('cartSidebar').classList.remove('open');
+  }
+
+  // =====================================================
+  //  購入フロー
+  // =====================================================
+  function beginCheckout() {
+    if (cart.length === 0) { showToast('カートに商品を追加してください'); return; }
+    const total = cart.reduce((s, i) => s + i.price, 0);
+
+    // ▶ dataLayer: begin_checkout
+    pushEvent('begin_checkout', {
+      currency: 'JPY',
+      value: total,
+      items: cart.map(i => ({ item_id: i.id, item_name: i.name, price: i.price, quantity: 1 }))
+    });
+
+    closeCart();
+    completePurchase();
+  }
+
+  function completePurchase() {
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const orderId = 'ORD-' + Date.now();
+
+    // ▶ dataLayer: purchase (Google広告コンバージョン)
+    pushEvent('purchase', {
+      transaction_id: orderId,
+      affiliation: 'LUMIÈRE Online Store',
+      value: total,
+      currency: 'JPY',
+      tax: Math.round(total * 0.1),
+      shipping: total >= 10000 ? 0 : 550,
+      items: cart.map(i => ({ item_id: i.id, item_name: i.name, price: i.price, quantity: 1 })),
+      // Google広告コンバージョン用追加パラメータ
+      google_ads_conversion_label: 'PURCHASE_LABEL',
+    });
+
+    cart = [];
+    renderCart();
+    showModal('purchase', { orderId, total });
+  }
+
+  // =====================================================
+  //  商品詳細
+  // =====================================================
+  function showProductDetail(productId) {
+    const p = PRODUCTS.find(x => x.id === productId);
+    if (!p) return;
+
+    // ▶ dataLayer: view_item (Google広告リマーケティング)
+    pushEvent('view_item', {
+      currency: 'JPY',
+      value: p.price,
+      items: [{ item_id: p.id, item_name: p.name, item_category: p.category, price: p.price, quantity: 1 }],
+      page_type: 'product',
+    });
+
+    const content = `
+      <div style="text-align:left;">
+        <div class="modal-detail-grid">
+          <div class="modal-detail-emoji">${p.emoji}</div>
+          <div class="modal-detail-info">
+            <h3>${p.name}</h3>
+            <div class="price">¥${p.price.toLocaleString()}</div>
+            <p>${p.desc}<br><br>美容皮膚科医監修。天然由来成分98%配合。全肌タイプ対応。</p>
+          </div>
+        </div>
+        <button class="btn-primary" style="width:100%;margin-bottom:12px;" onclick="addToCart('${p.id}');closeModal();">カートに追加する</button>
+        <button class="modal-close-btn" style="width:100%;background:transparent;color:var(--dark);border:1px solid var(--sand);" onclick="closeModal()">閉じる</button>
+      </div>
+    `;
+    const overlay = document.getElementById('modalOverlay');
+    const modal = document.getElementById('modalContent');
+    modal.innerHTML = content;
+    overlay.classList.add('open');
+  }
+
+  // =====================================================
+  //  問い合わせフォーム
+  // =====================================================
+  function submitContact() {
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const type = document.getElementById('contactType').value;
+    const msg = document.getElementById('contactMessage').value.trim();
+
+    if (!name || !email || !msg) {
+      showToast('必須項目を入力してください');
+      return;
+    }
+
+    // ▶ dataLayer: generate_lead (Google広告コンバージョン)
+    pushEvent('generate_lead', {
+      event_category: 'contact_form',
+      contact_type: type || 'not_specified',
+      has_name: !!name,
+      has_email: !!email,
+      // Google広告コンバージョン用
+      google_ads_conversion_label: 'LEAD_LABEL',
+    });
+
+    ['contactName','contactEmail','contactMessage'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('contactType').value = '';
+    showModal('contact');
+  }
+
+  // =====================================================
+  //  メルマガ登録
+  // =====================================================
+  function signupNewsletter() {
+    const email = document.getElementById('newsletterEmail').value.trim();
+    if (!email) { showToast('メールアドレスを入力してください'); return; }
+
+    // ▶ dataLayer: sign_up (Google広告コンバージョン)
+    pushEvent('sign_up', {
+      method: 'newsletter',
+      event_category: 'newsletter',
+      // Google広告コンバージョン用
+      google_ads_conversion_label: 'SIGNUP_LABEL',
+    });
+
+    document.getElementById('newsletterEmail').value = '';
+    showModal('newsletter');
+  }
+
+  // =====================================================
+  //  モーダル
+  // =====================================================
+  function showModal(type, data) {
+    const overlay = document.getElementById('modalOverlay');
+    const modal = document.getElementById('modalContent');
+    if (type === 'purchase') {
+      modal.innerHTML = `
+        <div class="modal-icon">🎉</div>
+        <h2>ご注文完了</h2>
+        <p>ありがとうございます！<br>注文番号：<strong>${data.orderId}</strong><br>合計金額：<strong>¥${data.total.toLocaleString()}</strong><br><br>確認メールをお送りしました。</p>
+        <button class="modal-close-btn" onclick="closeModal()">閉じる</button>
+      `;
+    } else if (type === 'contact') {
+      modal.innerHTML = `
+        <div class="modal-icon">✉️</div>
+        <h2>送信完了</h2>
+        <p>お問い合わせを受け付けました。<br>2営業日以内にご返信いたします。</p>
+        <button class="modal-close-btn" onclick="closeModal()">閉じる</button>
+      `;
+    } else if (type === 'newsletter') {
+      modal.innerHTML = `
+        <div class="modal-icon">🌸</div>
+        <h2>登録完了</h2>
+        <p>メルマガ登録ありがとうございます！<br>初回15%OFFクーポンをメールでお送りしました。</p>
+        <button class="modal-close-btn" onclick="closeModal()">閉じる</button>
+      `;
+    }
+    overlay.classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+
+  // =====================================================
+  //  セクション切り替え（SPA風）
+  // =====================================================
+  function showSection(sectionId) {
+    document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+    document.getElementById('section-' + sectionId).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // ▶ dataLayer: page_view（仮想ページビュー）
+    const pageMap = { home:'/', products:'/products', about:'/about', contact:'/contact' };
+    pushEvent('virtual_page_view', {
+      page_path: pageMap[sectionId] || '/',
+      page_title: sectionId,
+      page_type: sectionId === 'products' ? 'listing' : sectionId,
+    });
+  }
+
+  function scrollToTop() {
+    showSection('home');
+  }
+
+  // =====================================================
+  //  商品フィルター
+  // =====================================================
+  function filterProducts(category, tabEl) {
+    document.querySelectorAll('#productTabs .tab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
+
+    // ▶ dataLayer: tab_switch
+    pushEvent('tab_switch', { tab_name: category, section: 'product_list' });
+
+    renderProductGrid('all-products', category);
+  }
+
+  // =====================================================
+  //  商品グリッド描画
+  // =====================================================
+  function renderProductGrid(containerId, filter) {
+    const container = document.getElementById(containerId);
+    const products = filter && filter !== 'all'
+      ? PRODUCTS.filter(p => p.category === filter)
+      : PRODUCTS;
+
+    container.innerHTML = products.map(p => `
+      <div class="product-card">
+        <div class="product-img" onclick="showProductDetail('${p.id}')">
+          ${p.isNew ? '<span class="product-badge-new">NEW</span>' : ''}
+          <span style="font-size:72px;">${p.emoji}</span>
+        </div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-price">¥${p.price.toLocaleString()}</div>
+        <div class="product-actions">
+          <button class="btn-cart" onclick="addToCart('${p.id}')">カートに追加</button>
+          <button class="btn-detail" onclick="showProductDetail('${p.id}')">詳細</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // =====================================================
+  //  スクロール計測
+  // =====================================================
+  let scrollMilestones = new Set();
+  window.addEventListener('scroll', () => {
+    const scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    document.getElementById('scrollFill').style.width = scrollPct + '%';
+
+    [25, 50, 75, 100].forEach(milestone => {
+      if (scrollPct >= milestone && !scrollMilestones.has(milestone)) {
+        scrollMilestones.add(milestone);
+        // ▶ dataLayer: scroll_depth
+        pushEvent('scroll_depth', { depth: milestone, page_path: window.location.pathname });
+      }
+    });
+  });
+
+  // =====================================================
+  //  dataLayer モニター
+  // =====================================================
+  let monitorOpen = true;
+  function toggleMonitor() {
+    monitorOpen = !monitorOpen;
+    const log = document.getElementById('dlLog');
+    const btn = document.getElementById('dlToggleBtn');
+    log.style.display = monitorOpen ? '' : 'none';
+    btn.textContent = monitorOpen ? '▼ 折りたたむ' : '▶ 展開する';
+  }
+
+  function logToMonitor(eventName, params) {
+    const log = document.getElementById('dlLog');
+    const item = document.createElement('div');
+    item.className = 'dl-log-item';
+    const dataStr = Object.entries(params || {}).slice(0,3)
+      .map(([k,v]) => typeof v === 'object' ? `${k}:[...]` : `${k}:${v}`)
+      .join(' | ');
+    item.innerHTML = `
+      <div><span class="dl-log-event">${eventName}</span></div>
+      ${dataStr ? `<div class="dl-log-data">${dataStr}</div>` : ''}
+    `;
+    // Clear placeholder
+    const placeholder = log.querySelector('[style*="rgba"]');
+    if (placeholder) placeholder.remove();
+    log.insertBefore(item, log.firstChild);
+    // Keep max 10
+    while (log.children.length > 10) log.removeChild(log.lastChild);
+  }
+
+  // =====================================================
+  //  Toast
+  // =====================================================
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // =====================================================
+  //  初期化
+  // =====================================================
+  renderProductGrid('home-products', null);
+  renderProductGrid('all-products', null);
+
+  // ▶ dataLayer: page_view (最初のページロード)
+  pushEvent('page_view', {
+    page_path: '/',
+    page_title: 'LUMIÈRE - Premium Skincare',
+    page_type: 'home',
+  });
+</script>
+</body>
+</html>
